@@ -2,32 +2,32 @@
 
 CONFIG ?= config/harness.yaml
 UV ?= $(HOME)/.local/bin/uv
-LOG ?= off
+log ?= off
 
 doctor:
-	$(UV) run harness --config $(CONFIG) --log $(LOG) doctor
+	$(UV) run harness --config $(CONFIG) --log $(log) doctor
 
 eval:
-	$(UV) run harness --config $(CONFIG) --log $(LOG) eval
+	$(UV) run harness --config $(CONFIG) --log $(log) eval
 
 pack:
 	@mkdir -p dist
-	$(UV) run harness --config $(CONFIG) --log $(LOG) pack
+	$(UV) run harness --config $(CONFIG) --log $(log) pack
 
 submit:
-	$(UV) run harness --config $(CONFIG) --log $(LOG) submit
+	$(UV) run harness --config $(CONFIG) --log $(log) submit
 
 fetch:
-	$(UV) run harness --config $(CONFIG) --log $(LOG) fetch
+	$(UV) run harness --config $(CONFIG) --log $(log) fetch
 
 baseline:
-	$(UV) run harness --config $(CONFIG) --log $(LOG) baseline
+	$(UV) run harness --config $(CONFIG) --log $(log) baseline
 
 run:
-	$(UV) run harness --config $(CONFIG) --log $(LOG) run
+	$(UV) run harness --config $(CONFIG) --log $(log) run
 
 registry:
-	$(UV) run harness --config $(CONFIG) --log $(LOG) registry
+	$(UV) run harness --config $(CONFIG) --log $(log) registry
 
 test:
 	$(UV) run pytest
