@@ -155,6 +155,11 @@ def _ensure_loaded() -> None:
         pass
 
     try:
+        import harness.vector.seekdb  # noqa: F401
+    except ImportError:
+        pass
+
+    try:
         import harness.hpc.slurm  # noqa: F401
     except ImportError:
         pass

@@ -17,7 +17,14 @@
 | `weaviate` | 开源向量数据库，GraphQL 接口，内置向量化模块 | Docker/K8s，支持多租户 | 企业级场景，需要 RBAC 权限控制 |
 | `chromadb` | 轻量嵌入式向量数据库，API 极简（4 个核心函数） | pip 安装即用，也可部署 Server | 快速原型、LangChain 生态默认搭配 |
 | `pgvector` | PostgreSQL 扩展，向量和业务数据同表存储 | 装 Postgres + pgvector 扩展 | 已有 PG 基础设施，不想多引入一个数据库 |
-| `seekdb` | 自研/定制向量数据库 | 内部部署 | 你们自己的数据库系统 |
+| `seekdb` | AI-Native 搜索数据库，支持向量+全文+标量混合检索 | Docker 或嵌入式 | 需要多模态检索（向量+全文+GIS） |
+
+**SeekDB 适配器详情**：
+- `SeekDBVectorStore` — 向量检索（实现 VectorStore Protocol）
+- `SeekDBFullTextSearch` — 全文检索（MATCH...AGAINST）
+- `SeekDBScalarSearch` — 普通 SQL 查询
+- `SeekDBGISSearch` — GIS 地理检索（ST_Distance_Sphere, ST_Within）
+- `SeekDBHybridSearch` — 混合检索（向量+全文+标量过滤组合）
 
 **切换方式**：修改 `config/harness.yaml` 中 `vector_store.type`，并填写对应的 `connection` 字段。
 
