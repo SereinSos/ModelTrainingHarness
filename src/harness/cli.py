@@ -7,17 +7,11 @@ from pathlib import Path
 
 from harness.config import load_config
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="harness", description="Model Training Evaluation Harness")
     parser.add_argument("--config", type=Path, default=None, help="Path to config YAML (default: config/harness.yaml or $HARNESS_CONFIG)")
+    parser.add_argument("--log", choices=["on", "off"], default="off", help="Enable detailed logging (default: off)")
 
     sub = parser.add_subparsers(dest="command")
 
@@ -31,6 +25,16 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("registry", help="List registered backends")
 
     args = parser.parse_args(argv)
+
+    # Configure logging based on --log flag
+    if args.log == "on":
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s [%(levelname)s] %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        )
+    else:
+        logging.basicConfig(level=logging.WARNING)
 
     if args.command is None:
         parser.print_help()
