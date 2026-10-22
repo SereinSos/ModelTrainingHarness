@@ -79,7 +79,7 @@ flowchart TD
 | **存档** | MLflow 记录实验 |
 | **报告** | 分数展示 |
 
-### MVP 不包含（stub）
+### MVP （stub）
 
 | 模块 | 说明 |
 |---|---|

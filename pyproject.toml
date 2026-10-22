@@ -1,0 +1,49 @@
+[project]
+name = "harness"
+version = "0.1.0"
+description = "Model Training Evaluation Harness"
+readme = "README.md"
+authors = [
+    { name = "Sere.in", email = "SereinSos@163.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb>=1.5.9",
+    "mteb>=2.26.17",
+    "pyyaml>=6.0",
+    "sentence-transformers>=3.0",
+]
+
+[project.scripts]
+harness = "harness.cli:main"
+
+[project.optional-dependencies]
+eval = [
+    "sentence-transformers>=3.0",
+    "mteb>=1.1",
+]
+milvus = ["pymilvus>=2.4"]
+qdrant = ["qdrant-client>=1.9"]
+mlflow = ["mlflow>=2.10"]
+hpc = ["paramiko>=3.4"]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+]

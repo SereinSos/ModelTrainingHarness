@@ -1,0 +1,65 @@
+# ── 容器配置 ──────────────────────────────────────────
+container:
+  runtime: apptainer                    # apptainer | docker | none
+  image_path: /opt/containers/skdb_latest.sif
+  expected_version: "1.4.0"
+
+# ── 向量数据库（可插拔）────────────────────────────────
+# type: seekdb | milvus | qdrant | weaviate | chromadb | pgvector | memory
+vector_store:
+  type: chromadb
+  connection:
+    path: ./data/chroma_db
+  collection:
+    name: harness_vectors
+    dimension: 384
+    metric: cosine
+
+# ── Embedding 模型（可插拔）────────────────────────────
+# type: sentence_transformer | openai | stub
+embedding:
+  type: sentence_transformer
+  model_name_or_path: sentence-transformers/all-MiniLM-L6-v2
+  batch_size: 32
+  device: cpu
+
+# ── 数据集与评测任务（可插拔）──────────────────────────
+# provider: mteb | huggingface | stub
+evaluation:
+  provider: mteb
+  tasks:
+    - name: BIOSSES
+      languages: [en]
+  dataset_cache_dir: ./data/mteb_cache
+  output_dir: ./results/eval
+
+# ── 超算后端（可插拔）─────────────────────────────────
+# backend: slurm | pbs | local | ssh
+hpc:
+  backend: local
+  host: localhost
+  user: ""
+  ssh_key: ""
+  remote_dir: /tmp/hpc_work
+  resources:
+    nodes: 1
+    ntasks_per_node: 4
+    gpus: 0
+    memory: "16G"
+    time_limit: "01:00:00"
+    partition: default
+  container_bind: /data:/mnt
+
+# ── 实验追踪（可插拔）─────────────────────────────────
+# backend: mlflow | wandb | tensorboard | none
+tracking:
+  backend: none
+  tracking_uri: http://localhost:5000
+  experiment_name: model-training-harness
+
+# ── 报告输出 ──────────────────────────────────────────
+report:
+  output_dir: ./reports
+  formats:
+    - text
+    - json
