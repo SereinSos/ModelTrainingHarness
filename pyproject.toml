@@ -10,6 +10,9 @@ requires-python = ">=3.12"
 dependencies = [
     "chromadb>=1.5.9",
     "mteb>=2.26.17",
+    "pylibseekdb>=1.4.0.post1",
+    "pymysql>=1.2.3",
+    "pyseekdb>=1.4.0.post1",
     "pyyaml>=6.0",
     "sentence-transformers>=3.0",
 ]

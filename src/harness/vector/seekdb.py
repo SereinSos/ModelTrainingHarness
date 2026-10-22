@@ -13,6 +13,7 @@ class SeekDBVectorStore:
     def __init__(self, cfg: VectorStoreConfig) -> None:
         self._cfg = cfg
         self._client = None
+        self._collection = None
         self._collection_name = cfg.collection_name
         self._dimension = cfg.collection_dimension
         self._metric = cfg.collection_metric
