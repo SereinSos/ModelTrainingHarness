@@ -17,9 +17,6 @@ dependencies = [
     "sentence-transformers>=3.0",
 ]
 
-[project.scripts]
-harness = "harness.cli:main"
-
 [project.optional-dependencies]
 eval = [
     "sentence-transformers>=3.0",

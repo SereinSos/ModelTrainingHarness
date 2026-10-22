@@ -5,29 +5,29 @@ UV ?= $(HOME)/.local/bin/uv
 log ?= off
 
 doctor:
-	$(UV) run harness --config $(CONFIG) --log $(log) doctor
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) doctor
 
 eval:
-	$(UV) run harness --config $(CONFIG) --log $(log) eval
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) eval
 
 pack:
 	@mkdir -p dist
-	$(UV) run harness --config $(CONFIG) --log $(log) pack
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) pack
 
 submit:
-	$(UV) run harness --config $(CONFIG) --log $(log) submit
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) submit
 
 fetch:
-	$(UV) run harness --config $(CONFIG) --log $(log) fetch
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) fetch
 
 baseline:
-	$(UV) run harness --config $(CONFIG) --log $(log) baseline
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) baseline
 
 run:
-	$(UV) run harness --config $(CONFIG) --log $(log) run
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) run
 
 registry:
-	$(UV) run harness --config $(CONFIG) --log $(log) registry
+	$(UV) run python -m harness.cli --config $(CONFIG) --log $(log) registry
 
 test:
 	$(UV) run pytest
